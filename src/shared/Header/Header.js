@@ -6,6 +6,7 @@ import logo from '../../assets/logo.svg'
 const Header = () => {
     const menuItems = <>
     <li className='font-semibold'><Link to='/'>Home</Link></li>
+    <li className='font-semibold'><Link to='/login'>Login</Link></li>
     </>
     return (
     <div>
