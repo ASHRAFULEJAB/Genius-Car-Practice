@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import image from '../../../assets/images/login/login.svg'
+import { AuthContext } from '../../../context/UserContext/AuthProvider'
 
 const Login = () => {
+  const { login } = useContext(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault()
+    const form = e.target
+    const email = form.email.value
+    const password = form.password.value
+    login(email, password)
+      .then((result) => {
+        const user = result.user
+          console.log(user)
+          alert('login sucessfull')
+          form.reset()
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
   return (
     <div className='hero  my-10'>
