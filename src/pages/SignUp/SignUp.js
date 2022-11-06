@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import image from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../context/UserContext/AuthProvider'
+import { setAuthToken } from '../../utils/auth'
 
 const SignUp = () => {
   const { signUp } = useContext(AuthContext)
@@ -13,7 +14,8 @@ const SignUp = () => {
     signUp(email, password)
       .then((result) => {
         const user = result.user
-          console.log(user)
+        console.log(user)
+        setAuthToken(user)
           form.reset()
       })
       .catch((e) => {

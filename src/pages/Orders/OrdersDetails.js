@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-const OrdersDetails = ({ order }) => {
-  console.log(order)
-  const { serviceName, service, price, phone, email, customer } = order
+const OrdersDetails = ({ order, handleDelete, updateOrders }) => {
+  const { _id, serviceName, service, price, phone, email, customer, status } =
+    order
   const [orderDes, setOrderDes] = useState({})
   useEffect(() => {
-    fetch(`http://localhost:5000/services/${service}`)
+    fetch(`https://genius-car-server-one-gamma.vercel.app/services/${service}`)
       .then((res) => res.json())
       .then((data) => setOrderDes(data))
   }, [service])
@@ -13,7 +13,10 @@ const OrdersDetails = ({ order }) => {
   return (
     <tr>
       <th>
-        <button className='btn btn-circle btn-outline'>
+        <button
+          onClick={() => handleDelete(_id)}
+          className='btn btn-circle btn-outline'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6'
@@ -52,7 +55,12 @@ const OrdersDetails = ({ order }) => {
       </td>
       <td>{email}</td>
       <th>
-        <button className='btn btn-ghost btn-xs'>details</button>
+        <button
+          onClick={() => updateOrders(_id)}
+          className='btn btn-ghost btn-xs'
+        >
+          {status ? status : 'Pending'}
+        </button>
       </th>
     </tr>
   )

@@ -4,7 +4,7 @@ import ServiceCard from './ServiceCard'
 const Services = () => {
   const [services, setServices] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/services')
+    fetch('https://genius-car-server-one-gamma.vercel.app/services')
       .then((res) => res.json())
       .then((data) => setServices(data))
   }, [])
@@ -19,14 +19,10 @@ const Services = () => {
           humour, or randomised words which don't look even slightly believable.{' '}
         </p>
       </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3'>
-              {
-                  services.map(service => <ServiceCard
-                      key={service._id}
-                      service={service}
-                  ></ServiceCard>
-                    )
-              }
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3'>
+        {services.map((service) => (
+          <ServiceCard key={service._id} service={service}></ServiceCard>
+        ))}
       </div>
     </div>
   )
